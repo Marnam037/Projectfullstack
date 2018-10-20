@@ -85,7 +85,6 @@ app.post('/product/update', function (req, res) {
     res.redirect('/products');
 
 });
-
 //Add New Product
 app.get('/insert',function (req, res) {
     res.render('pages/insert'); 
