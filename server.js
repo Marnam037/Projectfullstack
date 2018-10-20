@@ -87,6 +87,7 @@ app.post('/product/update', function (req, res) {
 
 });
 //Add New Product
+
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
