@@ -6,6 +6,7 @@
                 <th>title</th>
                 <th>Price</th>
                 <th>Edit</th> 
+               <th><a name="" id="" class="btn btn-success" href="/insert" role="button">Add New</a></td></th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                  <td><%= product.price %></td>
                 
                 <td><a  class="btn btn-primary" href="/products/<%= product.id %>" role="button">Edit</a></td>
+                <td><a  class="btn btn-danger" href="/products/<%= product.id %>" role="button">Delete</a></td>
                 
 
             </tr>
