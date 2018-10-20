@@ -1,7 +1,7 @@
 var express = require('express');
-
 var pgp = require('pg-promise')();
-var db = pgp('postgres://nkwnjxuiidwrns:b72b4de42f726173c9acee8a85dd10ed1c8dc1a2ab7402a6feebbbccb8b14f85@ec2-54-163-245-44.compute-1.amazonaws.com:5432/d34ii1v5fr4h1e?ssl=true');
+//var db = pgp(process.env.DATABASE_URL);
+var db = pgp('postgres://zwkczabvzjehkh:9d7bacef083b60f955f8c2b407ca84846542de68c94aab2dce86907e9c7fea27@ec2-107-20-249-48.compute-1.amazonaws.com:5432/d9knlg2mile5gl?ssl=true');
 var app = express();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -16,33 +16,29 @@ app.get('/', function (req, res) {
 });
 
 app.get('/about', function (req, res) {
-    var name = 'Noppadon kaewkong';
+    var name = 'Poramat Nukliang';
     var hobbies = ['Music', 'Movie', 'Programming'];
     var bdate = '09/10/2018';
     res.render('pages/about', { fullname: name, hobbies: hobbies, bdate: bdate });
 });
 //Display all products
-app.get('/products', function (req, res) {
+app.get('/products', function(req, res) {
     var id = req.param('id');
-    var sql = 'select * from products';
-    if (id) {
-
-        sql += ' where id = ' + id;
-    }
-
-
-    db.any(sql, )
-        .then(function (data) {
-            console.log('data' + data)
-            res.render('pages/products', { products: data });
+    var sql='select* from products';
+        if(id){
+            sql += ' where id ='+id +' order by id ASC';
+        }
+   db.any(sql+' order by id ASC')
+    .then(function(data){
+        console.log('DATA:'+data);
+        res.render('pages/products',{products: data})
         })
-        .catch(function (error) {
-
-            console.log('ERROR' + error);
-
-        })
+    .catch(function(error){
+        console.log('ERROR:'+error);
+    })
 
 });
+
 
 app.get('/products/:pid', function (req, res) {
     var pid = req.params.pid;
@@ -59,22 +55,22 @@ app.get('/products/:pid', function (req, res) {
 
 
 });
-
-app.get('/users/:id', function (req, res) {
-    var id = req.param('id');
+// user 
+app.get('/users', function (req, res) {
+    var id = req.params.id;
     var sql = 'select * from users';
     if (id) {
-
-        sql += ' where id = ' + id;
+        sql += ' where id =' + id;
     }
     db.any(sql)
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('pages/users', { users: data });
+            res.render('pages/users', { users: data })
 
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
+
         })
 });
 //Update data
@@ -82,8 +78,9 @@ app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
-    var sql = `update product set title = ${title}, price =  ${price} where id = ${id}`;
+    var sql = `update products set title = '${title}',price = '${price}' where id = ${id}`;
     // db.none
+    db.none(sql);
     console.log('UPDATE:' + sql);
     res.redirect('/products');
 
