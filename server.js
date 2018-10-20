@@ -55,7 +55,7 @@ app.get('/products/:pid', function (req, res) {
 
 
 });
-// user 
+//User 
 app.get('/users', function (req, res) {
     var id = req.params.id;
     var sql = 'select * from users';
@@ -73,7 +73,7 @@ app.get('/users', function (req, res) {
 
         })
 });
-//Update data
+//Update Products data
 app.post('/product/update', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
@@ -86,7 +86,7 @@ app.post('/product/update', function (req, res) {
 
 });
 
-//add Product
+//Add New Product
 app.get('/insert',function (req, res) {
     res.render('pages/insert'); 
 })
@@ -109,6 +109,24 @@ app.post('/products/insert', function (req, res) {
         })
 });
 
+//Delete products
+app.get('/product_delete/:pid',function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM products';
+    if (id){
+            sql += ' where id ='+ id;
+    }
+    db.any(sql)
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.redirect('/products');
+    
+        })
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+                
+    })
+ });
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
