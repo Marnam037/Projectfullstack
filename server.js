@@ -4,6 +4,7 @@ var pgp = require('pg-promise')();
 var db = pgp('postgres://zwkczabvzjehkh:9d7bacef083b60f955f8c2b407ca84846542de68c94aab2dce86907e9c7fea27@ec2-107-20-249-48.compute-1.amazonaws.com:5432/d9knlg2mile5gl?ssl=true');
 var app = express();
 var bodyParser = require('body-parser');
+var moment = require('moment');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -86,9 +87,6 @@ app.post('/product/update', function (req, res) {
 
 });
 //Add New Product
-app.get('/insert',function (req, res) {
-    res.render('pages/insert'); 
-})
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
@@ -107,7 +105,10 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-
+app.get('/insert', function (req, res) {
+    var time = moment().format('MMMM Do YYYY, h:mm:ss a');
+    res.render('pages/insert', { time: time});
+});
 //Delete products
 app.get('/product_delete/:pid',function (req, res) {
     var id = req.params.pid;
