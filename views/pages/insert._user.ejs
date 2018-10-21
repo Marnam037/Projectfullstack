@@ -5,24 +5,29 @@
   <label for="id">ID</label>
   <input type="number"
     class="form-control" name="id" id="" aria-describedby="helpId" placeholder=""value="">
-  <small id="helpId" class="form-text text-muted">User ID</small>
+  <small id="helpId" class="form-text text-muted">user ID</small>
 </div>
 
   <div class="form-group">
-    <label for="email"></label>
+    <label for="email">email</label>
     <input type="text"
       class="form-control" name="email" id="" aria-describedby="helpId" placeholder=""value="">
-    <small id="helpId" class="form-text text-muted">Email</small>
+    <small id="helpId" class="form-text text-muted">user Email</small>
   </div>
 
   <div class="form-group">
-    <label for="Password"></label>
-    <input type="number"
+    <label for="password">password</label>
+    <input type="text"
       class="form-control" name="password" id="" aria-describedby="helpId" placeholder=""value="">
-    <small id="helpId" class="form-text text-muted">Password</small>
+    <small id="helpId" class="form-text text-muted">user Password</small>
     </div>
     
-    
+
+    <div class="form-group">
+        <label for="">Time</label>
+        <input type="text" class="form-control" value="<%= time %>" name="time" id="" aria-describedby="helpId" placeholder="" >
+        <small id="helpId" class="form-text text-muted">Time</small>
+      </div>
     <button type="submit" class="btn btn-success">Save</button>
   
 

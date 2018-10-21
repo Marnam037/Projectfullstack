@@ -172,10 +172,11 @@ app.post('/user/update', function (req, res) {
 //Add New user
 app.post('/users/insert_user', function (req, res) {
     var id = req.body.id;
-    var email = req.body.email;
-    var password = req.body.password;
-    var sql = `INSERT INTO users (id,email,password)
-    VALUES ('${id}', '${email}', '${password}')`;
+    var email =req.body.email;
+    var password =req.body.password;
+    var time =req.body.time;
+    var sql = `INSERT INTO users (id,email,password,created_at) 
+    VALUES ('${id}', '${email}', '${password}', '${time}')`;
     //db.none
     console.log('UPDATE:' + sql);
     db.any(sql)
@@ -187,6 +188,10 @@ app.post('/users/insert_user', function (req, res) {
         .catch(function (error) {
             console.log('ERROR:' + error);
         })
+});
+app.get('/insert_user', function (req, res) {
+    var time = moment().format();
+    res.render('pages/insert_user',{ time: time});
 });
 
 var port = process.env.PORT || 8080;
