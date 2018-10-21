@@ -155,6 +155,25 @@ app.get('/users/:id', function (req, res) {
             console.log('ERROR' + error);
         })
 });
+//Add New user
+app.post('/users/insert', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+    var sql = `INSERT INTO users (id,email,password)
+    VALUES ('${id}', '${email}', '${password}')`;
+    //db.none
+    console.log('UPDATE:' + sql);
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' + data);
+            res.redirect('/users')
+        })
+
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
