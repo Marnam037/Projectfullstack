@@ -116,7 +116,7 @@ app.get('/users', function (req, res) {
     db.any(sql + ' order by id ASC')
         .then(function (data) {
             console.log('DATA:' + data);
-            res.render('pages/users', { products: data })
+            res.render('pages/users', { users: data })
         })
         .catch(function (error) {
             console.log('ERROR:' + error);
@@ -145,10 +145,10 @@ app.get('/user_delete/:id', function (req, res) {
 //User_edit
 app.get('/users/:id', function (req, res) {
     var id = req.params.id;
-    var sql = "select * from products where id =" + id;
+    var sql = "select * from users where id =" + id;
     db.any(sql, )
         .then(function (data) {
-            res.render('pages/product_edit', { product: data[0] });
+            res.render('pages/user_edit', { user: data[0] });
         })
         .catch(function (error) {
 

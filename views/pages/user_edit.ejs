@@ -1,41 +1,28 @@
 <% include ../partials/header %>
-<H2>Search</H2>
- <input class="form-control" id="myInput" type="text" placeholder="Search">
- <table class="table">
-     <thead>
-         <tr>
-             <th>ID</th>
-             <th>Email</th>
-             <th>Password</th>
+<form action= "/user/update" method="post">
 
-             <th><a name="" id="" class="btn btn-success" href="/insert_user" role="button">Add New</a></td></th>
+<div class="form-group">
+  <label for="">ID</label>
+  <input type="number"
+    class="form-control" value = "<%= user.id %>" name="id" id="" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">user ID</small>
+</div>
 
-         </tr>
-     </thead>
-     <tbody id="myTable">
-     <% users.forEach(function(user){ %>
-         <tr>
-             <td scope="row"><%= user.id %></td>
-             <td><%= user.email %></td>
-             <td><%= user.password %></td>
-             <td><a name="" id="" class="btn btn-dark" href="/users/<%= user.id %>" role="button">Edit</a>
-             <a name="" id="" class="btn btn-danger" href="/user_delete/<%= user.id %>" onclick="return confirm('Are you sure you want to delete?')" role="button">Delete</a></td>
-         </tr>
-         <% }); %>
-             
-     </tbody>
- </table>
+<div class="form-group">
+  <label for="">Email</label>
+  <input type="text"
+    class="form-control"  value = "<%= user.email %>" name="email" id="email" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Email</small>
+</div>
 
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-
-
+<div class="form-group">
+  <label for="">Password</label>
+  <input type="number"
+    class="form-control" value = "<%= user.password %>" name="password" id="password" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Password</small>
+</div>
+<button type="submit" class="btn btn-warning">Cancel</button>
+<button type="submit" class="btn btn-primary">Save</button>
+<button type="submit" class="btn btn-danger">Delete</button>
+</form>
 <% include ../partials/footer %>
