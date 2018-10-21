@@ -174,8 +174,7 @@ app.post('/users/insert_user', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
-    var sql = `INSERT INTO users (id,email,password)
-    VALUES ('${id}', '${email}', '${password}')`;
+    var sql = `INSERT INTO users (id,email,password)  VALUES ('${id}', '${email}', '${password}')`;
     //db.none
     console.log('UPDATE:' + sql);
     db.any(sql)
