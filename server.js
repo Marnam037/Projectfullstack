@@ -22,7 +22,7 @@ app.get('/about', function (req, res) {
     var bdate = '09/10/2018';
     res.render('pages/about', { fullname: name, hobbies: hobbies, bdate: bdate });
 });
-//Display all products
+//Show all products
 app.get('/products', function(req, res) {
     var id = req.param('id');
     var sql='select* from products';
@@ -87,7 +87,6 @@ app.post('/product/update', function (req, res) {
 
 });
 //Add New Product
-
 app.post('/products/insert', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
@@ -121,6 +120,25 @@ app.get('/product_delete/:pid',function (req, res) {
         .then(function(data){
             console.log('DATA:'+data);
             res.redirect('/products');
+    
+        })
+        .catch(function(data){
+                console.log('ERROR:'+console.error);
+                
+    })
+ });
+
+ //Delete users
+app.get('/user_delete/:pid',function (req, res) {
+    var id = req.params.pid;
+    var sql = 'DELETE FROM users';
+    if (id){
+            sql += ' where id ='+ id;
+    }
+    db.any(sql)
+        .then(function(data){
+            console.log('DATA:'+data);
+            res.redirect('/users');
     
         })
         .catch(function(data){
