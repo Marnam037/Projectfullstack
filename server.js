@@ -125,8 +125,8 @@ app.get('/users', function (req, res) {
 });
 
 //Delete users
-app.get('/user_delete/:pid', function (req, res) {
-    var id = req.params.pid;
+app.get('/user_delete/:id', function (req, res) {
+    var id = req.params.id;
     var sql = 'DELETE FROM users';
     if (id) {
         sql += ' where id =' + id;
@@ -140,6 +140,19 @@ app.get('/user_delete/:pid', function (req, res) {
         .catch(function (data) {
             console.log('ERROR:' + console.error);
 
+        })
+});
+//User_edit
+app.get('/users/:id', function (req, res) {
+    var id = req.params.id;
+    var sql = "select * from products where id =" + id;
+    db.any(sql, )
+        .then(function (data) {
+            res.render('pages/product_edit', { product: data[0] });
+        })
+        .catch(function (error) {
+
+            console.log('ERROR' + error);
         })
 });
 
