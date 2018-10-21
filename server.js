@@ -189,10 +189,7 @@ app.post('/users/insert_user', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-app.get('/insert_user', function (req, res) {
-    var time = moment().format();
-    res.render('pages/insert_user',{ time: time});
-});
+
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
