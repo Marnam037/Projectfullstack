@@ -84,6 +84,7 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
+//Time
 app.get('/insert', function (req, res) {
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
     res.render('pages/insert', { time: time });
@@ -154,6 +155,19 @@ app.get('/users/:id', function (req, res) {
 
             console.log('ERROR' + error);
         })
+});
+
+//Update Users data
+app.post('/user/update', function (req, res) {
+    var id = req.body.id;
+    var email = req.body.email;
+    var password = req.body.password;
+    var sql = `update users set email = '${email}',password = '${password}' where id = ${id}`;
+    // db.none
+    db.none(sql);
+    console.log('UPDATE:' + sql);
+    res.redirect('/users');
+
 });
 //Add New user
 app.post('/users/insert', function (req, res) {
