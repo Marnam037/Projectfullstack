@@ -66,7 +66,7 @@ app.post('/product/update', function (req, res) {
 
 });
 //Add New Product
-app.post('/products/insert', function (req, res) {
+app.post('/products/insert_product', function (req, res) {
     var id = req.body.id;
     var title = req.body.title;
     var price = req.body.price;
@@ -84,10 +84,10 @@ app.post('/products/insert', function (req, res) {
             console.log('ERROR:' + error);
         })
 });
-//Time
-app.get('/insert', function (req, res) {
+//Time product
+app.get('/insert_product', function (req, res) {
     var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-    res.render('pages/insert', { time: time });
+    res.render('pages/insert_product', { time: time });
 });
 //Delete products
 app.get('/product_delete/:pid', function (req, res) {
@@ -170,7 +170,7 @@ app.post('/user/update', function (req, res) {
 
 });
 //Add New user
-app.post('/users/insert', function (req, res) {
+app.post('/users/insert_user', function (req, res) {
     var id = req.body.id;
     var email = req.body.email;
     var password = req.body.password;
