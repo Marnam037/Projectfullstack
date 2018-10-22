@@ -10,7 +10,7 @@
         <th>AMOUNT</th>
         </tr>
     </thead>
-    <tbody product_id="myTable">
+    <tbody id="myTable">
     <% products.forEach(function(product) { %>
         <tr class="bg-info text-light">
             <td scope="row"><%= product.title %></font></td>
@@ -21,8 +21,8 @@
         <% sum.forEach(function(sum) { %>
         <tr class="bg-danger text-light">
             <td scope="row"><h5>Total</h5></td>
-            <td product_id="quantity"><h5><%= sum.squantity %></h5></td>
-            <td product_id="price"><h5>$<%= sum.sprice %></h5></td>
+            <td id="quantity"><h5><%= sum.squantity %></h5></td>
+            <td id="price"><h5>$<%= sum.sprice %></h5></td>
         </tr>
         <% }); %>
     </tbody>
