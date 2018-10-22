@@ -138,68 +138,25 @@ app.get('/product_delete/:pid', function (req, res) {
             })
     
     });
-    //report Products
-    app.get('/report_product', function (req, res) {
-        var id = req.param('id');
-        var sql = 'select* from products ORDER BY Price DESC limit 10';
-        if (id) {
-            sql += ' where id =' + id;
-        }
-        db.any(sql)
-            .then(function (data) {
-                console.log('DATA:' + data);
-                res.render('pages/report_product', { products: data })
-    
-            })
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
-    
-    });
-    //report user
-    app.get('/report_user', function (req, res) {
-        db.any('select * from users ORDER BY  email ASC', )
-            .then(function (data) {
-                console.log('DATA' + data);
-                res.render('pages/report_user', { users: data })
-    
-            })
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
+    //report product
+    app.get('/report_product', function (req,res) {
+ 
+        var sql ='select products.product_id,products.title,sum(purchase_items.quantity) as quantity,sum(purchase_items.price) as price from products inner join purchase_items on purchase_items.product_id=products.product_id group by products.product_id;select sum(quantity) as squantity,sum(price) as sprice from purchase_items';
+        db.multi(sql)
+        .then(function  (data) 
+        {
+     
+            // console.log('DATA' + data);
+            res.render('pages/report_product', { products: data[0],sum: data[1]});
+        })
+        .catch(function (data) 
+        {
+            console.log('ERROR' + error);
+        })
     
     });
-    //report Products
-    app.get('/report_product', function (req, res) {
-        var id = req.param('id');
-        var sql = 'select* from products ORDER BY Price DESC limit 10';
-        if (id) {
-            sql += ' where id =' + id;
-        }
-        db.any(sql)
-            .then(function (data) {
-                console.log('DATA:' + data);
-                res.render('pages/report_product', { products: data })
     
-            })
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
     
-    });
-    //report user
-    app.get('/report_user', function (req, res) {
-        db.any('select * from users ORDER BY  email ASC', )
-            .then(function (data) {
-                console.log('DATA' + data);
-                res.render('pages/report_user', { users: data })
-    
-            })
-            .catch(function (error) {
-                console.log('ERROR:' + error);
-            })
-    
-    });
 //Show all users
 app.get('/users', function (req, res) {
     var id = req.param('id');
@@ -285,6 +242,21 @@ app.get('/insert_user', function (req, res) {
     var time = moment().format();
     res.render('pages/insert_user', { time: time });
 });
+//report user
+app.get('/report_user', function (req,res) {
+     
+    var sql = 'select users.email,purchases.name,products.title,purchase_items.quantity,purchase_items.price*purchase_items.quantity as total  from users INNER JOIN purchases ON purchases.user_id = users.user_id INNER JOIN purchase_items ON purchase_items.purchase_id=purchases.purchase_id   INNER JOIN products ON products.product_id = purchase_items.product_id order by purchase_items.price*purchase_items.quantity DESC limit 25';
+    
+    db.any(sql)
+        .then(function (data) {
+            console.log('DATA:' +data);
+            res.render('pages/report_user', { users: data });
+        })
+        .catch(function (error) {
+            console.log('ERROR:' + error);
+        })
+
+}); 
 
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
