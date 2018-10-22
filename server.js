@@ -108,21 +108,19 @@ app.get('/product_delete/:pid', function (req, res) {
         })
 });
 //report product
-app.get('/report_product', function(req, res) {
-    var sql ='SELECT products.id,products.title,products.price,products.tags,sum(purchase_items.quantity) as quantity,sum(purchase_items.price) as price FROM products,purchase_items where products.id=purchase_items.product_id group by products.id order by products.id ASC;select sum(quantity) as squantity,sum(price) as sprice from purchase_items';
+app.get('/report_product', function (req, res) {
+    var sql = 'SELECT products.id,products.title,products.price,products.tags,sum(purchase_items.quantity) as quantity,sum(purchase_items.price) as price FROM products,purchase_items where products.id=purchase_items.product_id group by products.id order by products.id ASC;select sum(quantity) as squantity,sum(price) as sprice from purchase_items';
     db.multi(sql)
-    .then(function  (data) 
-    {
-        // console.log('DATA' + data);
-        res.render('pages/report_product', { product: data[0],sum: data[1]});
-    })
-    .catch(function (data) 
-    {
-        console.log('ERROR' + error);
-    })
+        .then(function (data) {
+            // console.log('DATA' + data);
+            res.render('pages/report_product', { product: data[0], sum: data[1] });
+        })
+        .catch(function (data) {
+            console.log('ERROR' + error);
+        })
 });
 
-    
+
 //Show all users
 app.get('/users', function (req, res) {
     var id = req.param('id');
@@ -210,16 +208,14 @@ app.get('/insert_user', function (req, res) {
 });
 
 //report user
-app.get('/report_user', function(req, res) {
-    var sql='select purchases.user_id,purchases.name,users.email,sum(purchase_items.price) as price from purchases,users,purchase_items where purchases.user_id=users.id and purchases.id=purchase_items.purchase_id group by purchases.user_id,purchases.name,users.email order by sum(purchase_items.price) desc LIMIT 30'
+app.get('/report_user', function (req, res) {
+    var sql = 'select purchases.user_id,purchases.name,users.email,sum(purchase_items.price) as price from purchases,users,purchase_items where purchases.user_id=users.id and purchases.id=purchase_items.purchase_id group by purchases.user_id,purchases.name,users.email order by sum(purchase_items.price) desc LIMIT 30'
     db.any(sql)
-        .then(function (data) 
-        {
+        .then(function (data) {
             // console.log('DATA' + data);
-            res.render('pages/report_user', { user : data });
+            res.render('pages/report_user', { user: data });
         })
-        .catch(function (data) 
-        {
+        .catch(function (data) {
             console.log('ERROR' + error);
         })
 });
