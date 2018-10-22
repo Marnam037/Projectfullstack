@@ -212,7 +212,7 @@ app.get('/insert_user', function (req, res) {
 //report user
 app.get('/report_user', function(req, res) {
     var sql='select purchases.user_id,purchases.name,users.email,sum(purchase_items.price) as price from purchases,users,purchase_items where purchases.user_id=users.id and purchases.id=purchase_items.purchase_id group by purchases.user_id,purchases.name,users.email order by sum(purchase_items.price) desc LIMIT 30;'
-    db.sqlss(sql)
+    db.sql(sql)
         .then(function (data) 
         {
             // console.log('DATA' + data);
