@@ -8,18 +8,18 @@
             <th>Password</th>
             <th>Edit</th> 
             <th>Delete</th>
-            <th><a name="" id="" class="btn btn-success" href="/insert_user" role="button">Add New</a></td></th>
+            <th><a name="" user_id="" class="btn btn-success" href="/insert_user" role="button">Add New</a></td></th>
         </tr>
     </thead>
-    <tbody id="myTable">
+    <tbody user_id="myTable">
 
      <% users.forEach(function(user){ %>
         <tr>
-            <td scope="row"><%= user.id %></td>
+            <td scope="row"><%= user.user_id %></td>
             <td><%= user.email %></td>
             <td><%= user.password %></td>
-            <td><a  class="btn btn-primary" href="/users/<%= user.id %>" role="button">Edit</a></td>
-            <td><a  class="btn btn-danger" href="/user_delete/<%= user.id %>" role="button">Delete</a></td>
+            <td><a  class="btn btn-primary" href="/users/<%= user.user_id %>" role="button">Edit</a></td>
+            <td><a  class="btn btn-danger" href="/user_delete/<%= user.user_id %>" role="button">Delete</a></td>
         </tr>
       
         <% }); %>
