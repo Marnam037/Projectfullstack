@@ -110,7 +110,7 @@ app.get('/product_delete/:pid', function (req, res) {
 //report product
 app.get('/report_product', function(req, res) {
     var sql ='SELECT products.id,products.title,products.price,products.tags,sum(purchase_items.quantity) as quantity,sum(purchase_items.price) as price FROM products,purchase_items where products.id=purchase_items.product_id group by products.id order by products.id ASC;select sum(quantity) as squantity,sum(price) as sprice from purchase_items';
-    db.sqlss(sql)
+    db.multi(sql)
     .then(function  (data) 
     {
         // console.log('DATA' + data);
@@ -212,7 +212,7 @@ app.get('/insert_user', function (req, res) {
 //report user
 app.get('/report_user', function(req, res) {
     var sql='select purchases.user_id,purchases.name,users.email,sum(purchase_items.price) as price from purchases,users,purchase_items where purchases.user_id=users.id group by purchases.user_id,purchases.name,users.email order by sum(purchase_items.price) desc LIMIT 30;'
-    db.sqlss(sql)
+    db.any(sql)
         .then(function (data) 
         {
             // console.log('DATA' + data);
