@@ -1,29 +1,26 @@
-<% include ../partials/header%>
+<% include ../partials/header %>
 <div class="jumbotron">
+ <br>
+ <h2>Report User</h2>
 <table class="table">
-    <h1><center>Report: Total sale users</center></h1><br>
     <thead>
-        <tr class="text-info bg-dark">
+       <tr  class="bg-secondary">
+            <th>Customers ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Title</th>
-            <th>Quantity</th>
             <th>Total Sales</th>
-                       
         </tr>
     </thead>
-    <tbody id="myTable">
-    <% users.forEach(function(users){ %>
-        <tr class="bg-info text-light">
-            <td scope="row"><%= users.name %></td>           
-            <td><%= users.email %></td>
-            <td><%= users.title %></td>
-            <td><%= users.quantity %></td>
-            <td>$<%= users.total %></td>
-            
+    <tbody>
+    <% user.forEach(function(user) { %>
+        <tr>
+            <td scope="row"><font color="blue"><%= user.user_id %></td>
+            <td><font color="blue"><%= user.name %></td>
+            <td><font color="blue"><%= user.email %></td>
+            <td>$<%= user.price %></td>
         </tr>
-    <%}); %>
-    
+        <% }); %>
     </tbody>
-    </div>
 </table>
+</div>
+  <% include ../partials/footer %>
