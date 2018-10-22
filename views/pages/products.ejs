@@ -43,6 +43,19 @@ $(document).ready(function(){
   });
 });
 </script>
+<script>
+        var selectedProduct = 0;
+        function deleteProduct(id){
+            console.log(id);
+            selectedProduct = id;
+            $('#exampleModalCenter').modal('show')
+        }
+        function confirmDelete(){
+            console.log('confirm:'+selectedProduct);
+            window.location.href = '/product_delete/'+selectedProduct;
+        }        
+    </script>
+
 
 
 <% include ../partials/footer %>
